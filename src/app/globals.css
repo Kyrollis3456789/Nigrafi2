@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@200..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-amiri: 'Amiri', serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --color-primary: #990000;
+  --color-primary-hover: #7d0000;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color, #cbd5e1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted, #94a3b8);
+}
+
+/* Material Symbols icon helper */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 10 Curated Premium Light Themes */
+.theme-light-ivory {
+  --bg-color: #FDFBF7;
+  --text-color: #2c2a29;
+  --text-muted: #7c726e;
+  --border-color: #ebdcc9;
+  --accent-color: #990000;
+  --accent-hover: #7d0000;
+  --card-bg: #ffffff;
+  --accent-light: #fbebeb;
+  --slider-bg: #e2e8f0;
+}
+
+.theme-warm-sepia {
+  --bg-color: #f5efe6;
+  --text-color: #433422;
+  --text-muted: #8c7662;
+  --border-color: #ebdcc9;
+  --accent-color: #8c4300;
+  --accent-hover: #733700;
+  --card-bg: #faf6ef;
+  --accent-light: #f6ebd9;
+  --slider-bg: #e6dacb;
+}
+
+.theme-nordic-frost {
+  --bg-color: #f3f6f7;
+  --text-color: #2c3539;
+  --text-muted: #6c7b80;
+  --border-color: #d9e1e3;
+  --accent-color: #4682b4;
+  --accent-hover: #2a52be;
+  --card-bg: #fafbfc;
+  --accent-light: #e6f0fa;
+  --slider-bg: #dae3e6;
+}
+
+.theme-olive-grove {
+  --bg-color: #f4f6f0;
+  --text-color: #2e3822;
+  --text-muted: #6f7d5c;
+  --border-color: #e2e7d7;
+  --accent-color: #5b703e;
+  --accent-hover: #45542f;
+  --card-bg: #fafbfa;
+  --accent-light: #ebf0e3;
+  --slider-bg: #e0e6d5;
+}
+
+.theme-rose-gold {
+  --bg-color: #fff9f9;
+  --text-color: #3b282e;
+  --text-muted: #8a6773;
+  --border-color: #f3d6de;
+  --accent-color: #b85b75;
+  --accent-hover: #9c455e;
+  --card-bg: #ffffff;
+  --accent-light: #fcebf0;
+  --slider-bg: #f5dce3;
+}
+
+.theme-royal-linen {
+  --bg-color: #fbf9f4;
+  --text-color: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --accent-color: #1e3a8a;
+  --accent-hover: #172554;
+  --card-bg: #ffffff;
+  --accent-light: #dbeafe;
+  --slider-bg: #e2e8f0;
+}
+
+.theme-desert-sand {
+  --bg-color: #f9f3e9;
+  --text-color: #3a2e2b;
+  --text-muted: #7a6860;
+  --border-color: #e6d7c3;
+  --accent-color: #d97706;
+  --accent-hover: #b45309;
+  --card-bg: #fffdfa;
+  --accent-light: #fef3c7;
+  --slider-bg: #e5d5be;
+}
+
+.theme-mint-leaf {
+  --bg-color: #f0fdf4;
+  --text-color: #14532d;
+  --text-muted: #4ade80;
+  --border-color: #bbf7d0;
+  --accent-color: #16a34a;
+  --accent-hover: #15803d;
+  --card-bg: #ffffff;
+  --accent-light: #dcfce7;
+  --slider-bg: #bbf7d0;
+}
+
+.theme-soft-lavender {
+  --bg-color: #faf5ff;
+  --text-color: #3b0764;
+  --text-muted: #a855f7;
+  --border-color: #e9d5ff;
+  --accent-color: #9333ea;
+  --accent-hover: #7e22ce;
+  --card-bg: #ffffff;
+  --accent-light: #f3e8ff;
+  --slider-bg: #e9d5ff;
+}
+
+.theme-parchment {
+  --bg-color: #f4ead5;
+  --text-color: #3d2b1f;
+  --text-muted: #7a5c47;
+  --border-color: #d9c5a7;
+  --accent-color: #8b4513;
+  --accent-hover: #6a340d;
+  --card-bg: #fdf8ed;
+  --accent-light: #ebd8bd;
+  --slider-bg: #d9c5a7;
+}
+
+/* 10 Curated Premium Dark Themes */
+.theme-charcoal-night {
+  --bg-color: #121212;
+  --text-color: #e3e3e3;
+  --text-muted: #969696;
+  --border-color: #252525;
+  --accent-color: #990000;
+  --accent-hover: #bf0000;
+  --card-bg: #1a1a1a;
+  --accent-light: #331515;
+  --slider-bg: #2d2d2d;
+}
+
+.theme-dark-espresso {
+  --bg-color: #1c1512;
+  --text-color: #ebdcc9;
+  --text-muted: #a39281;
+  --border-color: #332722;
+  --accent-color: #d97706;
+  --accent-hover: #f59e0b;
+  --card-bg: #261e1a;
+  --accent-light: #3d2b20;
+  --slider-bg: #382d28;
+}
+
+.theme-midnight-gold {
+  --bg-color: #0b132b;
+  --text-color: #d2d7df;
+  --text-muted: #7f8fa6;
+  --border-color: #1c2541;
+  --accent-color: #f5b041;
+  --accent-hover: #f39c12;
+  --card-bg: #1c2541;
+  --accent-light: #2c344d;
+  --slider-bg: #222d4c;
+}
+
+.theme-nebula {
+  --bg-color: #0b0914;
+  --text-color: #e2dff0;
+  --text-muted: #968fb3;
+  --border-color: #211c33;
+  --accent-color: #ec4899;
+  --accent-hover: #f472b6;
+  --card-bg: #161324;
+  --accent-light: #2c1a3b;
+  --slider-bg: #29243d;
+}
+
+.theme-liquid-glass {
+  --bg-color: #0b0916;
+  --text-color: #f1f0f5;
+  --text-muted: #9ba1b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --accent-color: #a78bfa;
+  --accent-hover: #c4b5fd;
+  --card-bg: rgba(26, 22, 46, 0.55);
+  --accent-light: rgba(167, 139, 250, 0.15);
+  --slider-bg: rgba(255, 255, 255, 0.08);
+  background-image: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
+                    radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
+}
+
+.theme-deep-sea {
+  --bg-color: #051923;
+  --text-color: #e0f2fe;
+  --text-muted: #38bdf8;
+  --border-color: #003554;
+  --accent-color: #0284c7;
+  --accent-hover: #0369a1;
+  --card-bg: #002b42;
+  --accent-light: #0c4a6e;
+  --slider-bg: #003554;
+}
+
+.theme-obsidian {
+  --bg-color: #09090b;
+  --text-color: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --border-color: #27272a;
+  --accent-color: #e4e4e7;
+  --accent-hover: #ffffff;
+  --card-bg: #18181b;
+  --accent-light: #27272a;
+  --slider-bg: #3f3f46;
+}
+
+.theme-velvet-plum {
+  --bg-color: #180914;
+  --text-color: #fae8ff;
+  --text-muted: #e879f9;
+  --border-color: #3b0764;
+  --accent-color: #d946ef;
+  --accent-hover: #c026d3;
+  --card-bg: #2e1029;
+  --accent-light: #581c87;
+  --slider-bg: #3b0764;
+}
+
+.theme-cyber-matrix {
+  --bg-color: #021206;
+  --text-color: #dcfce7;
+  --text-muted: #4ade80;
+  --border-color: #052e16;
+  --accent-color: #22c55e;
+  --accent-hover: #16a34a;
+  --card-bg: #052e16;
+  --accent-light: #14532d;
+  --slider-bg: #052e16;
+}
+
+.theme-gothic-dark {
+  --bg-color: #120a0a;
+  --text-color: #fee2e2;
+  --text-muted: #f87171;
+  --border-color: #450a0a;
+  --accent-color: #dc2626;
+  --accent-hover: #b91c1c;
+  --card-bg: #270f0f;
+  --accent-light: #7f1d1d;
+  --slider-bg: #450a0a;
+}
+
+.theme-liquid-glass .app-card,
+.theme-liquid-glass aside,
+.theme-liquid-glass header,
+.theme-liquid-glass .bg-white\/50,
+.theme-liquid-glass .bg-slate-900\/50,
+.theme-liquid-glass .app-sidebar {
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  background-color: rgba(15, 12, 33, 0.45) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Custom Theme Support */
+.theme-custom {
+  --bg-color: var(--custom-bg, #f5efe6);
+  --text-color: var(--custom-text, #433422);
+  --accent-color: var(--custom-accent, #8c4300);
+  
+  --border-color: color-mix(in srgb, var(--text-color) 12%, var(--bg-color));
+  --card-bg: color-mix(in srgb, var(--text-color) 4%, var(--bg-color));
+  --text-muted: color-mix(in srgb, var(--text-color) 60%, var(--bg-color));
+  --accent-light: color-mix(in srgb, var(--accent-color) 10%, var(--bg-color));
+  --slider-bg: color-mix(in srgb, var(--text-color) 20%, var(--bg-color));
+}
+
+/* Base application styling using variables */
+.app-container {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.app-card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.app-border {
+  border-color: var(--border-color);
+}
+
+.app-text-muted {
+  color: var(--text-muted);
+}
+
+.app-accent {
+  color: var(--accent-color);
+}
+
+.app-accent-bg {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+.app-accent-bg-light {
+  background-color: var(--accent-light);
+  color: var(--accent-color);
+}
+
+/* Custom transitions and premium feel */
+.interactive-element {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}

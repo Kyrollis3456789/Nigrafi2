@@ -1,0 +1,6 @@
+{
+  "name": "Pi Graphi",
+  "description": "Sacred Coptic Orthodox Scripture Library, Audio Reader, and Study Tools",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

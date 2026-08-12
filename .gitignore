@@ -1,0 +1,69 @@
+# dependencies
+node_modules/
+/.pnpm
+/.yarn
+
+# next.js build output
+.next/
+out/
+build/
+dist/
+
+# vercel
+.vercel/
+
+# testing & coverage
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.nyc_output/
+
+# environment files
+.env*
+!.env.example
+
+# misc & OS
+.DS_Store
+*.log
+*.tsbuildinfo
+
+.vercel
+
+# Auto-generated entries
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Sensitive files (auto-detected)
+.env.example
+node_modules
+tsconfig.tsbuildinfo
+

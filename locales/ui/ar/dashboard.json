@@ -1,0 +1,22 @@
+{
+  "dashboard": "لوحة القيادة",
+  "welcome": "مرحبًا بك في PoliApp",
+  "appTitle": "بوليتي أب / PoliApp",
+  "appSubtitle": "البوابة الرقمية الأرثوذكسية • Coptic Orthodox Digital Portal",
+  "piGraphiCardTitle": "بي غرافي | Pi-Graphi",
+  "piGraphiCardSubtitle": "الكتاب المقدس / Holy Bible",
+  "piGraphiCardDescription": "اقرأ واستمع إلى الكتاب المقدس باللغات القبطية والعربية والإنجليزية مع التفاسير والأدوات المتقدمة.",
+  "settingsCardTitle": "الإعدادات | Settings",
+  "settingsCardSubtitle": "خيارات التطبيق / Application Options",
+  "settingsCardDescription": "خصص الواجهة واللغات وأحجام الخطوط وتفضيلات القراءة والمزامنة الصوتية.",
+  "servicesCardTitle": "الخدمات | Services",
+  "servicesCardSubtitle": "الصلوات والخدمات / Liturgical Services",
+  "servicesCardDescription": "الصلوات والخدمات الطقسية اليومية ستكون متاحة قريباً.",
+  "libraryCardTitle": "المكتبة | Library",
+  "libraryCardSubtitle": "المكتبة الطقسية / Ecclesiastical Library",
+  "libraryCardDescription": "آباء الكنيسة والألحان والقديسين والمخطوطات النادرة ستكون متاحة قريباً.",
+  "active": "نشط",
+  "locked": "مقفل",
+  "footerCopyright": "© {{year}} PoliApp. جميع الحقوق محفوظة.",
+  "footerTagline": "الكنيسة القبطية الأرثوذكسية • Coptic Orthodox Church"
+}

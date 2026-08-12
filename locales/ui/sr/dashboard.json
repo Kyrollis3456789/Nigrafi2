@@ -1,0 +1,22 @@
+{
+  "dashboard": "Дасхбоард",
+  "welcome": "Добродошли у ПолиАпп",
+  "appTitle": "PoliApp / بوليتي أب",
+  "appSubtitle": "Coptic Orthodox Digital Portal • البوابة الرقمية الأرثوذكسية",
+  "piGraphiCardTitle": "بي غرافي | Pi-Graphi",
+  "piGraphiCardSubtitle": "Holy Bible / الكتاب المقدس",
+  "piGraphiCardDescription": "Read and listen to scripture in Coptic, Arabic, and English with patristic commentary and advanced tools.",
+  "settingsCardTitle": "الإعدادات | Settings",
+  "settingsCardSubtitle": "Application Options / خيارات التطبيق",
+  "settingsCardDescription": "Customize the interface, languages, font sizes, reading preferences, and audio synchronization.",
+  "servicesCardTitle": "الخدمات | Services",
+  "servicesCardSubtitle": "Liturgical Services / الصلوات والخدمات",
+  "servicesCardDescription": "Prayers, liturgies, and daily church services will be available soon.",
+  "libraryCardTitle": "المكتبة | Library",
+  "libraryCardSubtitle": "Ecclesiastical Library / المكتبة الطقسية",
+  "libraryCardDescription": "Church fathers, hymns, saints, and rare manuscripts will be available soon.",
+  "active": "Active",
+  "locked": "Locked",
+  "footerCopyright": "© {{year}} PoliApp. All rights reserved.",
+  "footerTagline": "Coptic Orthodox Church • كنيسة قبطية أرثوذكسية"
+}
