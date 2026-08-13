@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useDeferredValue } from 'react';
 import { BOOKS, CHAPTER_DATA } from '../lib/scriptureData';
 import { useTranslation } from '../lib/i18n';
 
@@ -34,31 +34,40 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  const deferredQuery = useDeferredValue(query);
 
-  // Search matching books
-  const matchedBooks = BOOKS.filter(b =>
-    b.name.toLowerCase().includes(query.toLowerCase()) ||
-    (b.copticName && b.copticName.toLowerCase().includes(query.toLowerCase()))
-  );
+  const { matchedBooks, matchedVerses } = useMemo(() => {
+    const trimmedQuery = deferredQuery.trim();
+    const lowerQuery = trimmedQuery.toLowerCase();
 
-  // Search verse text in index
-  const matchedVerses: { bookName: string; bookId: string; chapter: number; verse: number; text: string }[] = [];
-  if (query.trim().length >= 2) {
-    Object.values(CHAPTER_DATA).forEach((chap) => {
-      chap.verses.forEach((v) => {
-        if (v.text.toLowerCase().includes(query.toLowerCase()) || (v.copticText && v.copticText.toLowerCase().includes(query.toLowerCase()))) {
-          matchedVerses.push({
-            bookName: chap.bookName,
-            bookId: chap.bookId,
-            chapter: chap.chapterNumber,
-            verse: v.number,
-            text: v.text,
-          });
-        }
+    // Search matching books (preserve original behavior of returning all books if query is empty)
+    const matchedBooks = BOOKS.filter(b =>
+      b.name.toLowerCase().includes(lowerQuery) ||
+      (b.copticName && b.copticName.toLowerCase().includes(lowerQuery))
+    );
+
+    // Search verse text in index
+    const matchedVerses: { bookName: string; bookId: string; chapter: number; verse: number; text: string }[] = [];
+    if (trimmedQuery.length >= 2) {
+      Object.values(CHAPTER_DATA).forEach((chap) => {
+        chap.verses.forEach((v) => {
+          if (v.text.toLowerCase().includes(lowerQuery) || (v.copticText && v.copticText.toLowerCase().includes(lowerQuery))) {
+            matchedVerses.push({
+              bookName: chap.bookName,
+              bookId: chap.bookId,
+              chapter: chap.chapterNumber,
+              verse: v.number,
+              text: v.text,
+            });
+          }
+        });
       });
-    });
-  }
+    }
+
+    return { matchedBooks, matchedVerses };
+  }, [deferredQuery]);
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-start justify-center pt-20 px-4">
