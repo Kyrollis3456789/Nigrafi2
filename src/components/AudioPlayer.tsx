@@ -127,13 +127,13 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
   return (
     <div
       dir={isAr ? 'rtl' : 'ltr'}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-[var(--card-bg)]/90 backdrop-blur-md rounded-full shadow-2xl border app-border px-6 py-3 transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 duration-200"
+      className="fixed bottom-0 md:bottom-6 w-full md:w-auto left-0 md:left-1/2 md:-translate-x-1/2 z-50 flex items-center gap-4 bg-[var(--card-bg)]/90 backdrop-blur-md rounded-t-xl md:rounded-full shadow-2xl border app-border px-4 md:px-6 py-4 md:py-3 transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 duration-200"
     >
       
       {/* 1. Play / Pause Action Button */}
       <button
         onClick={onTogglePlay}
-        className="w-10 h-10 app-accent-bg hover:scale-105 active:scale-95 rounded-full flex items-center justify-center text-white shadow-md transition-all shrink-0 cursor-pointer"
+        className="min-w-[44px] min-h-[44px] app-accent-bg hover:scale-105 active:scale-95 rounded-full flex items-center justify-center text-white shadow-md transition-all shrink-0 cursor-pointer"
         title={isPlaying ? t('audioPause') : t('audioPlay')}
       >
         {isPlaying ? (
@@ -147,7 +147,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
       <button
         onClick={onPrevVerse}
         disabled={verseNumber <= 1}
-        className="p-1.5 rounded-full hover:bg-[var(--accent-light)] text-[var(--text-color)] disabled:opacity-30 interactive-element cursor-pointer"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-[var(--accent-light)] text-[var(--text-color)] disabled:opacity-30 interactive-element cursor-pointer"
         title={t('previousVerse')}
       >
         {isAr ? <SkipForward size={16} /> : <SkipBack size={16} />}
@@ -175,7 +175,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
       <button
         onClick={onNextVerse}
         disabled={verseNumber >= totalVerses}
-        className="p-1.5 rounded-full hover:bg-[var(--accent-light)] text-[var(--text-color)] disabled:opacity-30 interactive-element cursor-pointer"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-[var(--accent-light)] text-[var(--text-color)] disabled:opacity-30 interactive-element cursor-pointer"
         title={t('nextVerse')}
       >
         {isAr ? <SkipBack size={16} /> : <SkipForward size={16} />}
@@ -184,7 +184,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
       {/* 5. Speed Multiplier Selection */}
       <button
         onClick={cycleSpeed}
-        className="px-2 py-1 bg-[var(--slider-bg)] text-[var(--text-color)] hover:bg-[var(--accent-light)]/40 rounded-full font-mono text-[9px] font-bold transition-colors cursor-pointer shrink-0"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-[var(--slider-bg)] text-[var(--text-color)] hover:bg-[var(--accent-light)]/40 rounded-full font-mono text-[9px] font-bold transition-colors cursor-pointer shrink-0"
         title={t('playbackSpeed')}
       >
         {speed}x
@@ -193,7 +193,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
       {/* Volume Mute Toggle */}
       <button
         onClick={() => setIsMuted(!isMuted)}
-        className="p-1.5 rounded-full hover:bg-[var(--accent-light)] text-[var(--text-color)] interactive-element cursor-pointer shrink-0 ml-1"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-[var(--accent-light)] text-[var(--text-color)] interactive-element cursor-pointer shrink-0 md:ml-1"
         title={isMuted ? t('unmute') : t('mute')}
       >
         {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
@@ -207,7 +207,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
           if (isPlaying) onTogglePlay();
           setHasInteracted(false);
         }}
-        className="p-1.5 text-slate-400 hover:text-[var(--text-color)] hover:bg-[var(--accent-light)]/40 rounded-full transition-colors cursor-pointer"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-[var(--text-color)] hover:bg-[var(--accent-light)]/40 rounded-full transition-colors cursor-pointer"
         title={t('closePlayer')}
       >
         <X size={16} />

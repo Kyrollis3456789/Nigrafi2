@@ -24,7 +24,7 @@ export const BookmarksModal: React.FC<BookmarksModalProps> = React.memo(({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-[var(--card-bg)] text-[var(--text-color)] rounded-xl shadow-2xl border border-[var(--border-color)] w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <div className="fixed inset-x-0 bottom-0 rounded-t-2xl max-h-[90vh] md:inset-auto md:rounded-xl md:w-full md:max-w-lg md:relative bg-[var(--card-bg)] text-[var(--text-color)] shadow-2xl border border-[var(--border-color)] overflow-hidden animate-in slide-in-from-bottom md:zoom-in-95 duration-150">
         {/* Modal Header */}
         <div className="p-4 border-b border-[var(--border-color)] flex justify-between items-center bg-[var(--bg-color)]">
           <div className="flex items-center gap-2">

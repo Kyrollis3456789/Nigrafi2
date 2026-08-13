@@ -191,7 +191,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-8 bg-black/65 backdrop-blur-md transition-opacity duration-300 animate-in fade-in">
       <div 
         dir={isRtl ? 'rtl' : 'ltr'}
-        className="w-full max-w-5xl h-[88vh] min-h-[580px] flex flex-col md:flex-row bg-[var(--card-bg)] text-[var(--text-color)] rounded-3xl border app-border shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="fixed inset-x-0 bottom-0 rounded-t-2xl max-h-[90vh] md:inset-auto md:w-full md:max-w-5xl md:h-[88vh] md:min-h-[580px] md:rounded-3xl md:relative flex flex-col md:flex-row bg-[var(--card-bg)] text-[var(--text-color)] border app-border shadow-2xl overflow-hidden animate-in slide-in-from-bottom md:zoom-in-95 duration-200"
       >
         
         {/* Sidebar Navigation */}
