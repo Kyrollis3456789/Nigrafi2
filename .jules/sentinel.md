@@ -1,0 +1,4 @@
+## 2025-02-18 - XSS via dangerouslySetInnerHTML and search highlights
+**Vulnerability:** Cross-Site Scripting (XSS) due to unescaped user-provided data being rendered inside `dangerouslySetInnerHTML`. The backend API search route manually constructed HTML strings (`<mark>`) using `text.substring()` without escaping special HTML characters.
+**Learning:** Even if data seems safe (like Bible verses), relying on `dangerouslySetInnerHTML` without proper server-side or client-side sanitization is highly risky. Manually constructing HTML strings and concatenating user data without a dedicated escaping function opens up critical vulnerabilities.
+**Prevention:** Always escape HTML entities (`&`, `<`, `>`, `"`, `'`) before manually injecting dynamic text into HTML tags, especially when utilizing `dangerouslySetInnerHTML` on the frontend.
