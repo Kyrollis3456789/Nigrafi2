@@ -249,14 +249,14 @@ export const Header: React.FC<HeaderProps> = ({
   const activeBookObj = BOOKS.find(b => b.id === selectedBookInNav) || BOOKS[3];
 
   return (
-    <header className="flex justify-between items-center w-full px-4 md:px-8 py-3 bg-[var(--card-bg)] border-b app-border z-30 shrink-0 transition-colors duration-300 relative">
+    <header className="flex justify-between items-center w-full px-2 py-2 md:px-8 md:py-3 bg-[var(--card-bg)] border-b app-border z-30 shrink-0 transition-colors duration-300 relative">
       
       {/* 1. RIGHT SIDE / START (RTL Context) - Back + Book & Chapter Selector Dropdown */}
       <div className="flex items-center gap-2">
         {onGoBack && (
           <button
             onClick={onGoBack}
-            className="flex items-center justify-center w-9 h-9 rounded-full border app-border hover:bg-[var(--accent-light)]/40 transition-colors cursor-pointer interactive-element"
+            className="flex items-center justify-center min-w-[44px] min-h-[44px] rounded-full border app-border hover:bg-[var(--accent-light)]/40 transition-colors cursor-pointer interactive-element"
             title={t('backToDashboard')}
           >
             <span className="material-symbols-outlined text-[var(--accent-color)] text-lg">{isAr ? 'arrow_forward' : 'arrow_back'}</span>
@@ -457,7 +457,7 @@ export const Header: React.FC<HeaderProps> = ({
       {/* 2. LEFT SIDE / END (RTL Context) - Clean Search & Settings */}
       <div className="flex items-center gap-3">
         {/* Search Input Box */}
-        <div className="relative w-44 sm:w-64" ref={searchRef}>
+        <div className="relative w-32 md:w-64" ref={searchRef}>
           <input
             type="text"
             value={searchQuery}
@@ -509,7 +509,7 @@ export const Header: React.FC<HeaderProps> = ({
                       dir={isAr ? 'rtl' : 'ltr'}
                     >
                       <div className="flex flex-col text-right">
-                        <span className="text-[11px] font-bold text-[var(--text-color)]">{isAr ? res.arabicName : res.bookName}</span>
+                        <span className="text-sm md:text-[11px] font-bold text-[var(--text-color)]">{isAr ? res.arabicName : res.bookName}</span>
                         <span className="text-[9px] text-[var(--text-muted)] font-normal">{res.categoryName}</span>
                       </div>
                       <BookOpen size={12} className="app-accent shrink-0" />
@@ -530,7 +530,7 @@ export const Header: React.FC<HeaderProps> = ({
                       dir={isAr ? 'rtl' : 'ltr'}
                     >
                       <div className="flex flex-col text-right">
-                        <span className="text-[11px] font-bold text-[var(--accent-color)]">{res.citation}</span>
+                        <span className="text-sm md:text-[11px] font-bold text-[var(--accent-color)]">{res.citation}</span>
                         <span className="text-[9px] text-[var(--text-muted)] font-normal">{res.text}</span>
                       </div>
                       <Sparkles size={12} className="text-amber-500 shrink-0 animate-pulse" />
@@ -566,7 +566,7 @@ export const Header: React.FC<HeaderProps> = ({
                       )}
                     </div>
                     <p 
-                      className="text-[11px] text-[var(--text-color)] leading-relaxed font-serif truncate text-ellipsis w-full"
+                      className="text-sm md:text-[11px] text-[var(--text-color)] leading-relaxed font-serif truncate text-ellipsis w-full"
                       dangerouslySetInnerHTML={{ __html: fullRes.highlightedText || fullRes.text }}
                     />
                   </button>
@@ -580,7 +580,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           title={t('settings')}
           onClick={onOpenSettings}
-          className="p-2 rounded-full text-slate-500 hover:bg-[var(--accent-light)]/30 hover:text-[var(--accent-color)] dark:text-slate-400 transition-colors cursor-pointer border border-transparent hover:border-[var(--accent-color)]/20"
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-slate-500 hover:bg-[var(--accent-light)]/30 hover:text-[var(--accent-color)] dark:text-slate-400 transition-colors cursor-pointer border border-transparent hover:border-[var(--accent-color)]/20"
         >
           <Settings size={18} strokeWidth={2.2} />
         </button>

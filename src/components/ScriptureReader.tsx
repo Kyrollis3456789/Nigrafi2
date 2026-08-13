@@ -279,7 +279,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onScroll={onCloseMenu}
-      className="h-full overflow-y-auto relative flex flex-col app-container transition-colors duration-300 pb-36"
+      className="h-full overflow-y-auto relative flex flex-col app-container transition-colors duration-300 pb-24 md:pb-36"
     >
       
       {/* Constraints main reading area and centers it for Breathing space */}
@@ -389,7 +389,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
                 key={verse.number}
                 onClick={(e) => handleVerseClick(e, verse.number, verseText)}
                 onContextMenu={(e) => handleRightClick(e, verse.number, verseText)}
-                className={`group relative p-3.5 md:p-5 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm transition-all duration-200 cursor-pointer hover:bg-[var(--accent-light)]/20 ${bgStyle}`}
+                className={`group relative px-4 py-4 md:px-8 md:py-8 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm transition-all duration-200 cursor-pointer hover:bg-[var(--accent-light)]/20 ${bgStyle}`}
                 style={{ breakInside: 'avoid' }}
               >
                 {/* Verse Header Info */}

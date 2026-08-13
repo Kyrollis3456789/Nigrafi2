@@ -11,7 +11,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({ onSelectModule }) 
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-6 bg-[#fdfaf6] text-[#433422] font-serif transition-colors duration-300 relative overflow-hidden select-none">
+    <div className="min-h-[100dvh] w-full flex flex-col items-center justify-center p-4 md:p-6 bg-[#fdfaf6] text-[#433422] font-serif transition-colors duration-300 relative overflow-hidden select-none">
       <div className="absolute top-[-10%] right-[-10%] w-[40vw] h-[40vw] opacity-[0.03] pointer-events-none rounded-full border-[10px] border-[#8c4300]" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] opacity-[0.03] pointer-events-none rounded-full border-[10px] border-[#8c4300]" />
 
@@ -31,7 +31,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({ onSelectModule }) 
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-4xl px-4 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full max-w-4xl px-2 md:px-4 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150">
         <div
           onClick={() => onSelectModule('pi-graphi')}
           className="group relative cursor-pointer overflow-hidden rounded-2xl border border-[#e8dfd1] bg-[#fcf8f2] p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-[#d4af37] hover:shadow-xl active:scale-[0.98]"
