@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useDeferredValue } from 'react';
 import { BOOKS, CHAPTER_DATA } from '../lib/scriptureData';
 import { useTranslation } from '../lib/i18n';
 
@@ -36,29 +36,45 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Search matching books
-  const matchedBooks = BOOKS.filter(b =>
-    b.name.toLowerCase().includes(query.toLowerCase()) ||
-    (b.copticName && b.copticName.toLowerCase().includes(query.toLowerCase()))
-  );
+  // ⚡ Bolt Performance Optimization:
+  // Decoupled the search input state (query) from the expensive filtering operation
+  // using useDeferredValue. This ensures the UI remains responsive during typing.
+  // The filtering operation is also memoized with useMemo so it only recalculates
+  // when the deferred query actually changes, preventing unnecessary recalculations across renders.
+  const deferredQuery = useDeferredValue(query);
 
-  // Search verse text in index
-  const matchedVerses: { bookName: string; bookId: string; chapter: number; verse: number; text: string }[] = [];
-  if (query.trim().length >= 2) {
-    Object.values(CHAPTER_DATA).forEach((chap) => {
-      chap.verses.forEach((v) => {
-        if (v.text.toLowerCase().includes(query.toLowerCase()) || (v.copticText && v.copticText.toLowerCase().includes(query.toLowerCase()))) {
-          matchedVerses.push({
-            bookName: chap.bookName,
-            bookId: chap.bookId,
-            chapter: chap.chapterNumber,
-            verse: v.number,
-            text: v.text,
-          });
-        }
+  const { matchedBooks, matchedVerses } = useMemo(() => {
+    const lowerQuery = deferredQuery.toLowerCase();
+
+    // Search matching books
+    const books = BOOKS.filter(b =>
+      b.name.toLowerCase().includes(lowerQuery) ||
+      (b.copticName && b.copticName.toLowerCase().includes(lowerQuery))
+    );
+
+    // Search verse text in index
+    const verses: { bookName: string; bookId: string; chapter: number; verse: number; text: string }[] = [];
+    if (deferredQuery.trim().length >= 2) {
+      Object.values(CHAPTER_DATA).forEach((chap) => {
+        chap.verses.forEach((v) => {
+          if (
+            v.text.toLowerCase().includes(lowerQuery) ||
+            (v.copticText && v.copticText.toLowerCase().includes(lowerQuery))
+          ) {
+            verses.push({
+              bookName: chap.bookName,
+              bookId: chap.bookId,
+              chapter: chap.chapterNumber,
+              verse: v.number,
+              text: v.text,
+            });
+          }
+        });
       });
-    });
-  }
+    }
+
+    return { matchedBooks: books, matchedVerses: verses };
+  }, [deferredQuery]);
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-start justify-center pt-20 px-4">
