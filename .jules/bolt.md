@@ -1,0 +1,3 @@
+## 2024-08-16 - Search Modal Render Optimization
+**Learning:** Recalculating large search indexes over thousands of items on every render without `useMemo` is a significant performance bottleneck, particularly for interactive search modals where re-renders might happen frequently. Additionally, calling `Object.values` and creating intermediate arrays inside a render method is expensive compared to directly iterating over object keys.
+**Action:** Always wrap computationally expensive search algorithms or derivations inside `useMemo` so that they only recalculate when the dependency (e.g., `query`) actually changes. Optimize hot search loops by moving operations like `.toLowerCase()` outside the loop and avoiding implicit array allocations.

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BOOKS, CHAPTER_DATA } from '../lib/scriptureData';
 import { useTranslation } from '../lib/i18n';
 
@@ -37,28 +37,46 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   if (!isOpen) return null;
 
   // Search matching books
-  const matchedBooks = BOOKS.filter(b =>
-    b.name.toLowerCase().includes(query.toLowerCase()) ||
-    (b.copticName && b.copticName.toLowerCase().includes(query.toLowerCase()))
-  );
+  const matchedBooks = useMemo(() => {
+    const lowerQuery = query.toLowerCase();
+    return BOOKS.filter(b =>
+      b.name.toLowerCase().includes(lowerQuery) ||
+      (b.copticName && b.copticName.toLowerCase().includes(lowerQuery))
+    );
+  }, [query]);
 
   // Search verse text in index
-  const matchedVerses: { bookName: string; bookId: string; chapter: number; verse: number; text: string }[] = [];
-  if (query.trim().length >= 2) {
-    Object.values(CHAPTER_DATA).forEach((chap) => {
-      chap.verses.forEach((v) => {
-        if (v.text.toLowerCase().includes(query.toLowerCase()) || (v.copticText && v.copticText.toLowerCase().includes(query.toLowerCase()))) {
-          matchedVerses.push({
-            bookName: chap.bookName,
-            bookId: chap.bookId,
-            chapter: chap.chapterNumber,
-            verse: v.number,
-            text: v.text,
-          });
+  const matchedVerses = useMemo(() => {
+    const results: { bookName: string; bookId: string; chapter: number; verse: number; text: string }[] = [];
+    const trimmedQuery = query.trim();
+    if (trimmedQuery.length >= 2) {
+      const lowerQuery = trimmedQuery.toLowerCase();
+      // Iterate directly over keys to avoid allocating intermediate arrays like Object.values does
+      for (const key in CHAPTER_DATA) {
+        const chap = CHAPTER_DATA[key];
+        const verses = chap.verses;
+        const len = verses.length;
+        for (let i = 0; i < len; i++) {
+          const v = verses[i];
+          const text = v.text;
+          const copticText = v.copticText;
+          if (
+            (text && text.toLowerCase().includes(lowerQuery)) ||
+            (copticText && copticText.toLowerCase().includes(lowerQuery))
+          ) {
+            results.push({
+              bookName: chap.bookName,
+              bookId: chap.bookId,
+              chapter: chap.chapterNumber,
+              verse: v.number,
+              text: text,
+            });
+          }
         }
-      });
-    });
-  }
+      }
+    }
+    return results;
+  }, [query]);
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-start justify-center pt-20 px-4">
