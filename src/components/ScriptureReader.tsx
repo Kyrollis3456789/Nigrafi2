@@ -60,7 +60,15 @@ interface ScriptureReaderProps {
   audioActive?: boolean;
 }
 
-export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
+/**
+ * ⚡ Bolt Optimization:
+ * Wrapped ScriptureReader in React.memo to prevent expensive re-renders.
+ * The component receives large objects (chapterData, arrays of bookmarks) and complex callbacks.
+ * Memoizing it avoids re-rendering the entire chapter of verses when the parent component updates
+ * other UI states (like opening sidebars or changing unrelated settings).
+ * Expected impact: Reduces re-renders of the main reading area, saving CPU cycles on long chapters.
+ */
+export const ScriptureReader: React.FC<ScriptureReaderProps> = React.memo(({
   chapterData,
   selectedVerseNumber,
   onSelectVerse,
@@ -428,4 +436,6 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
       </div>
     </div>
   );
-};
+});
+
+ScriptureReader.displayName = "ScriptureReader";
