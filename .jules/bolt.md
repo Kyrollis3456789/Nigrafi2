@@ -1,0 +1,3 @@
+## 2025-03-01 - O(N+1) Component Rendering Bottleneck
+**Learning:** During rendering in React components that loop over a large dataset (e.g., verses), calling array search methods like `Array.prototype.find` or `Array.prototype.includes` for each item causes an O(N * M) performance bottleneck where N is verses and M is the size of the array to search. This codebase is particularly susceptible as large scriptures are rendered synchronously.
+**Action:** Always pre-compute a `Map` (for object retrieval) or `Set` (for existence checks) from the source array before the `.map()` loop, ideally using `React.useMemo` to prevent re-computing on unchanged renders.
