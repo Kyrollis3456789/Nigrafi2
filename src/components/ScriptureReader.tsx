@@ -91,13 +91,22 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
     chapters: 1
   };
 
+  // ⚡ Bolt: Memoize highlights as a Set to replace O(N) array.includes() with O(1) Set.has() inside the rendering loop
+  const highlightsSet = React.useMemo(() => new Set(highlights), [highlights]);
+
+  // ⚡ Bolt: Memoize bookmarks for the current chapter to replace O(N) array.find() with O(1) Map.get() inside the rendering loop
+  const bookmarksMap = React.useMemo(() => {
+    const map = new Map<number, BookmarkType>();
+    bookmarks.forEach(b => {
+      if (b.bookName === chapterData.bookName && b.chapter === chapterData.chapterNumber) {
+        map.set(b.verse, b);
+      }
+    });
+    return map;
+  }, [bookmarks, chapterData.bookName, chapterData.chapterNumber]);
+
   const getBookmarkForVerse = (verseNum: number) => {
-    return bookmarks.find(
-      b =>
-        b.bookName === chapterData.bookName &&
-        b.chapter === chapterData.chapterNumber &&
-        b.verse === verseNum
-    );
+    return bookmarksMap.get(verseNum);
   };
 
   const handleRightClick = (e: React.MouseEvent, verseNum: number, verseText: string) => {
@@ -325,7 +334,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
             {chapterData.verses.map((verse) => {
               const isSelected = selectedVerseNumber === verse.number;
               const isPlaying = playingVerseNumber === verse.number;
-              const isHighlighted = highlights.includes(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
+              const isHighlighted = highlightsSet.has(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
               
               const vNumberStr = isArabicInterface ? toArabicNumerals(verse.number) : verse.number.toString();
               
@@ -371,7 +380,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
             {chapterData.verses.map((verse) => {
               const isSelected = selectedVerseNumber === verse.number;
               const isPlaying = playingVerseNumber === verse.number;
-              const isHighlighted = highlights.includes(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
+              const isHighlighted = highlightsSet.has(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
             const bookmark = getBookmarkForVerse(verse.number);
 
             let bgStyle = 'border-transparent';
