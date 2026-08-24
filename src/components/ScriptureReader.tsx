@@ -91,14 +91,27 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
     chapters: 1
   };
 
+  // ⚡ Bolt: Convert bookmarks to a Map using useMemo to avoid O(N) Array.find lookups during O(M) verse rendering.
+  // Impact: Reduces complexity from O(M*N) to O(M) when rendering verses in a chapter.
+  const currentChapterBookmarksMap = React.useMemo(() => {
+    const map = new Map();
+    for (const b of bookmarks) {
+      if (b.bookName === chapterData.bookName && b.chapter === chapterData.chapterNumber) {
+        map.set(b.verse, b);
+      }
+    }
+    return map;
+  }, [bookmarks, chapterData.bookName, chapterData.chapterNumber]);
+
   const getBookmarkForVerse = (verseNum: number) => {
-    return bookmarks.find(
-      b =>
-        b.bookName === chapterData.bookName &&
-        b.chapter === chapterData.chapterNumber &&
-        b.verse === verseNum
-    );
+    return currentChapterBookmarksMap.get(verseNum);
   };
+
+  // ⚡ Bolt: Convert highlights to a Set using useMemo to avoid O(N) Array.includes lookups during O(M) verse rendering.
+  // Impact: Reduces complexity from O(M*N) to O(M) when rendering verses in a chapter.
+  const currentChapterHighlightsSet = React.useMemo(() => {
+    return new Set(highlights);
+  }, [highlights]);
 
   const handleRightClick = (e: React.MouseEvent, verseNum: number, verseText: string) => {
     e.preventDefault();
@@ -325,7 +338,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
             {chapterData.verses.map((verse) => {
               const isSelected = selectedVerseNumber === verse.number;
               const isPlaying = playingVerseNumber === verse.number;
-              const isHighlighted = highlights.includes(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
+              const isHighlighted = currentChapterHighlightsSet.has(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
               
               const vNumberStr = isArabicInterface ? toArabicNumerals(verse.number) : verse.number.toString();
               
@@ -371,7 +384,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
             {chapterData.verses.map((verse) => {
               const isSelected = selectedVerseNumber === verse.number;
               const isPlaying = playingVerseNumber === verse.number;
-              const isHighlighted = highlights.includes(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
+              const isHighlighted = currentChapterHighlightsSet.has(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
             const bookmark = getBookmarkForVerse(verse.number);
 
             let bgStyle = 'border-transparent';
