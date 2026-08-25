@@ -91,13 +91,20 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
     chapters: 1
   };
 
+  const highlightsSet = React.useMemo(() => new Set(highlights), [highlights]);
+
+  const chapterBookmarksMap = React.useMemo(() => {
+    const map = new Map<number, BookmarkType>();
+    bookmarks.forEach(b => {
+      if (b.bookName === chapterData.bookName && b.chapter === chapterData.chapterNumber) {
+        map.set(b.verse, b);
+      }
+    });
+    return map;
+  }, [bookmarks, chapterData.bookName, chapterData.chapterNumber]);
+
   const getBookmarkForVerse = (verseNum: number) => {
-    return bookmarks.find(
-      b =>
-        b.bookName === chapterData.bookName &&
-        b.chapter === chapterData.chapterNumber &&
-        b.verse === verseNum
-    );
+    return chapterBookmarksMap.get(verseNum);
   };
 
   const handleRightClick = (e: React.MouseEvent, verseNum: number, verseText: string) => {
@@ -325,7 +332,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
             {chapterData.verses.map((verse) => {
               const isSelected = selectedVerseNumber === verse.number;
               const isPlaying = playingVerseNumber === verse.number;
-              const isHighlighted = highlights.includes(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
+              const isHighlighted = highlightsSet.has(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
               
               const vNumberStr = isArabicInterface ? toArabicNumerals(verse.number) : verse.number.toString();
               
@@ -371,7 +378,7 @@ export const ScriptureReader: React.FC<ScriptureReaderProps> = ({
             {chapterData.verses.map((verse) => {
               const isSelected = selectedVerseNumber === verse.number;
               const isPlaying = playingVerseNumber === verse.number;
-              const isHighlighted = highlights.includes(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
+              const isHighlighted = highlightsSet.has(`${chapterData.bookId}-${chapterData.chapterNumber}-${verse.number}`);
             const bookmark = getBookmarkForVerse(verse.number);
 
             let bgStyle = 'border-transparent';
